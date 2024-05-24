@@ -59,8 +59,8 @@
 				E949E65628F0DBF7004E8A62 /* Info.plist */,
 				E949E64628F0D485004E8A62 /* Assets.xcassets */,
 				E949E64228F0D483004E8A62 /* MapsSelectorApp.swift */,
-				E949E64428F0D483004E8A62 /* ContentView.swift */,
 				E949E65428F0D8A4004E8A62 /* DirectionsController.swift */,
+				E949E64428F0D483004E8A62 /* ContentView.swift */,
 				E949E65228F0D575004E8A62 /* Transport.swift */,
 				E949E64828F0D485004E8A62 /* Preview Content */,
 			);

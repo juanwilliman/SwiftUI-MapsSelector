@@ -11,11 +11,16 @@ import SwiftUI
 
 class DirectionsController: ObservableObject {
     
-    // MARK: - Variables
+    // MARK: - Properties
     
     @Published var isShowingMapsActionSheet = false
     
     @AppStorage("selectedTransport") var selectedTransport: Transport = .driving
+    
+    // MARK: - Init
+    
+    static let shared = DirectionsController()
+    private init() {}
     
 }
 
@@ -48,16 +53,6 @@ extension DirectionsController {
             string: "https://www.google.co.in/maps/dir/??saddr=&daddr=\(lat),\(lon)&directionsmode=\(transport)"
         )
         UIApplication.shared.open(googleMapsWebURL!, options: [:], completionHandler: nil)
-    }
-    
-}
-
-// MARK: - Transport
-
-extension DirectionsController {
-    
-    func selectTransport(_ transport: Transport) {
-        selectedTransport = transport
     }
     
 }

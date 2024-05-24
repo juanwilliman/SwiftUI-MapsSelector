@@ -11,33 +11,31 @@ import SwiftUI
 
 struct ContentView: View {
     
-    // MARK: - Variables
+    // MARK: - Properties
     
-    @ObservedObject private var directionsController = DirectionsController()
+    @ObservedObject private var directionsController = DirectionsController.shared
     
     // MARK: - Body
     
     var body: some View {
-        
-        VStack(spacing: 25) {
-            
-            Text("Transport")
-                .font(.largeTitle)
-            
-            HStack(spacing: 30) {
-                ForEach(Transport.allCases, id: \.self) { transport in
-                    Button(transport.rawValue) {
-                        directionsController.selectTransport(transport)
+        NavigationStack {
+            List {
+                Section {
+                    Picker("Transport", selection: $directionsController.selectedTransport) {
+                        ForEach(Transport.allCases, id: \.self) { transport in
+                            Text(transport.rawValue)
+                        }
                     }
-                    .foregroundColor(directionsController.selectedTransport == transport ? .red : .accentColor)
+                    Button("Show Directions") {
+                        directionsController.isShowingMapsActionSheet = true
+                    }
+                } header: {
+                    Text("Options")
+                } footer: {
+                    Text("If Google Maps isn't installed, it will be launched from your browser.")
                 }
             }
-            .padding(.bottom, 50)
-            
-            Button("Show Directions") {
-                directionsController.isShowingMapsActionSheet = true
-            }.buttonStyle(.borderedProminent)
-            
+            .navigationTitle("Maps Selector")
         }
         .actionSheet(isPresented: $directionsController.isShowingMapsActionSheet) {
             ActionSheet(
@@ -54,8 +52,6 @@ struct ContentView: View {
 
 // MARK: - Preview
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+#Preview {
+    ContentView()
 }
